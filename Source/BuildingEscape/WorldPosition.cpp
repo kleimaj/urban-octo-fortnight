@@ -31,8 +31,12 @@ void UWorldPosition::BeginPlay()
 
 	// UE_LOG(LogTemp, Warning, TEXT(""));
 
-	FString Name = GetOwner()->GetName();
-	UE_LOG(LogTemp, Warning, TEXT("This component is attached to: %s"), *Name);
+	// FString Name = GetOwner()->GetName();
+	// UE_LOG(LogTemp, Warning, TEXT("This component is attached to: %s"), *Name);
+	// UE_LOG(LogTemp, Warning, TEXT("This component is attached to: %s"), *GetOwner()->GetName());
+
+	FString ObjectPosition = GetOwner()->GetActorLocation().ToString();
+	UE_LOG(LogTemp, Warning, TEXT("This object position is: %s"), *ObjectPosition);
 	
 }
 
