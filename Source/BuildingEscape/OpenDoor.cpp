@@ -1,8 +1,11 @@
 // Copyright Dirty Minds Combined 2021
 
 
+#include "Engine/World.h"
+#include "GameFramework/PlayerController.h"
 #include "OpenDoor.h"
 #include "GameFramework/Actor.h"
+
 
 // Sets default values for this component's properties
 UOpenDoor::UOpenDoor()
@@ -27,6 +30,7 @@ void UOpenDoor::BeginPlay()
 	if (!PressurePlate) {
 		UE_LOG(LogTemp, Error, TEXT("%s has OpenDoor component but no PressurePlate set"), *GetOwner()->GetName());
 	}
+	ActorThatOpen = GetWorld()->GetFirstPlayerController()->GetPawn(); 
 }
 
 
