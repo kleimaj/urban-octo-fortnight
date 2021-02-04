@@ -29,6 +29,7 @@ private:
 
 	float InitialYaw;
 	float CurrentYaw;
+	void OpenDoor(float DeltaTime);
 
 	UPROPERTY(EditAnywhere)
 	float TargetYaw = 90.f;
@@ -36,5 +37,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
 
-		
+	UPROPERTY(EditAnywhere)
+	AActor* ActorThatOpen;
 };
