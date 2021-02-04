@@ -30,6 +30,7 @@ private:
 	float InitialYaw;
 	float CurrentYaw;
 	void OpenDoor(float DeltaTime);
+	void CloseDoor(float DeltaTime);
 
 	UPROPERTY(EditAnywhere)
 	float TargetYaw = 90.f;

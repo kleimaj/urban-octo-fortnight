@@ -1,9 +1,9 @@
 // Copyright Dirty Minds Combined 2021
 
 
+#include "OpenDoor.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
-#include "OpenDoor.h"
 #include "GameFramework/Actor.h"
 
 
@@ -42,6 +42,9 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	if (PressurePlate && PressurePlate->IsOverlappingActor(ActorThatOpen)) {
 		OpenDoor(DeltaTime);
 	}
+	else {
+		CloseDoor(DeltaTime);
+	}
 	
 }
 
@@ -49,6 +52,16 @@ void UOpenDoor::OpenDoor(float DeltaTime)
 {
 	FRotator OpenDoor = GetOwner()->GetActorRotation();
 	CurrentYaw = FMath::FInterpTo(CurrentYaw, TargetYaw, DeltaTime, 2);
+	OpenDoor.Yaw = CurrentYaw;
+
+	GetOwner()->SetActorRotation(OpenDoor);
+}
+
+
+void UOpenDoor::CloseDoor(float DeltaTime)
+{
+	FRotator OpenDoor = GetOwner()->GetActorRotation();
+	CurrentYaw = FMath::FInterpTo(CurrentYaw, InitialYaw, DeltaTime, 2);
 	OpenDoor.Yaw = CurrentYaw;
 
 	GetOwner()->SetActorRotation(OpenDoor);
