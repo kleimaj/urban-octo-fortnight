@@ -29,7 +29,17 @@ void UGrabber::BeginPlay()
 	if (!PhysicsHandle) {
 		UE_LOG(LogTemp, Error, TEXT("Physics Handle not attached to %s"), *GetOwner()->GetName());
 	}
+
+	InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
+	if (InputComponent) {
+		InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+	}
 	
+}
+
+void UGrabber::Grab()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Grabber pressed"));
 }
 
 
