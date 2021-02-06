@@ -2,6 +2,7 @@
 
 
 #include "OpenDoor.h"
+#include "Components/AudioComponent.h"
 #include "Components/PrimitiveComponent.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
@@ -32,8 +33,14 @@ void UOpenDoor::BeginPlay()
 	if (!PressurePlate) {
 		UE_LOG(LogTemp, Error, TEXT("%s has OpenDoor component but no PressurePlate set"), *GetOwner()->GetName());
 	}
+	FindAudioComponent();
 }
 
+void UOpenDoor::FindAudioComponent()
+{
+	AudioComponent = GetOwner()->FindComponentByClass<UAudioComponent>();
+	if (!AudioComponent) return;
+}
 
 // Called every frame
 void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -60,6 +67,13 @@ void UOpenDoor::OpenDoor(float DeltaTime)
 	OpenDoor.Yaw = CurrentYaw;
 
 	GetOwner()->SetActorRotation(OpenDoor);
+
+	CloseDoorSound = false;
+	if (!AudioComponent) return;
+	if (!OpenDoorSound) {
+		AudioComponent->Play();
+		OpenDoorSound = true;
+	}
 }
 
 
@@ -70,6 +84,13 @@ void UOpenDoor::CloseDoor(float DeltaTime)
 	OpenDoor.Yaw = CurrentYaw;
 
 	GetOwner()->SetActorRotation(OpenDoor);
+
+	OpenDoorSound = false;
+	if (!AudioComponent) return;
+	if (!CloseDoorSound) {
+		AudioComponent->Play();
+		CloseDoorSound = true;
+	}
 }
 
 float UOpenDoor::TotalMassOfActors() const
