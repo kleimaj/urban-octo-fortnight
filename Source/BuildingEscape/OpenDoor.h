@@ -34,6 +34,8 @@ private:
 	float CurrentYaw;
 	float DoorLastOpened = 0.f;
 
+	UPROPERTY(EditAnywhere)
+	float MassToOpenDoors = 50.f;
 
 	UPROPERTY(EditAnywhere)
 	float DoorCloseDelay = .4f;
@@ -46,5 +48,6 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	AActor* ActorThatOpen;
+
 };
 
